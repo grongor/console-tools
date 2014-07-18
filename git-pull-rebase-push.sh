@@ -1,7 +1,32 @@
 #!/bin/bash
 
-. colors.sh
-. functions.sh
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+. $DIR/colors.sh
+. $DIR/functions.sh
+
+to=master
+while true; do
+    case "$1" in
+        -i | --interactive ) interactive="-i"; shift ;;
+        --onto )
+            onto="--onto master";
+            to=$2
+            shift 2
+            ;;
+        -h | --help )
+            echo -e "Usage: $(basename $0) [-i|--interactive] [--onto branch_name] [-h|--help]\n"
+            echo -e "\t-i | --interactive:\tGit rebase will be in interactive mode"
+            echo -e "\t--onto branch_name:\tGit will perform rebase against 'branch_name' branch instead of master"
+            echo -e "\t\t\t\tRebase will still be performed on the master branch."
+            echo -e "\t\t\t\tFor further info see git rebase --help"
+            echo -e "\t-h | --help:\t\tShows this help"
+            exit 0
+            ;;
+        -- ) shift; break ;;
+        * ) break ;;
+    esac
+done
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 #branch=source_test # test source branch
@@ -10,34 +35,29 @@ if [[ $branch == 'master' ]]; then
     exit 1
 fi
 
-to=master
-if [[ $# -eq 1 ]]; then
-    onto="--onto master"
-    to=$1
+if [[ -n $onto ]]; then
     echo -e "I am going to rebase current branch '${Yellow}${branch}${Color_Off}', originating from branch '${Yellow}${to}${Color_Off}' onto the ${Yellow}master${Color_Off} branch."
     echo -e "Is that what you wanted? ${Green}git rebase $onto ${to} ${branch}${Color_Off} Type y/n:"
     confirm
     [[ $? -eq 0 ]] && exit
 fi
 
-exit
-
 git checkout master
-git pull
+git pull --ff-only
 
 #mkdir /if/this/folder/exists/then/you/are/insane 2> /dev/null # test pull conflicts
 
-if [[ $? -eq 1 ]]; then
+if [[ $? -ne 0 ]]; then
     echo -e "\n${White}${On_Red}Some conflicts appeared after we pulled the master branch.${Color_Off}\n\n"
     echo -e "Please fix them and then run this command again if you wish.\n"
     exit 1
 fi
 
-git rebase $onto ${to} ${branch}
+git rebase $interactive $onto ${to} ${branch}
 
 #mkdir /if/this/folder/exists/then/you/are/insane 2> /dev/null # test rebase conflicts
 
-if [[ $? -eq 1 ]]; then
+if [[ $? -ne 0 ]]; then
     echo -e "\n${White}${On_Red}Some conflicts appeared after the we did the rebase.${Color_Off}\n\n"
     echo -e "Please fix them and then run this command again if you wish."
     echo -e "To do so, please ${Green}follow the git instructions above the error message.${Color_Off}\n"
