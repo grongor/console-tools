@@ -78,7 +78,7 @@ if [[ -z $changes ]]; then
     echo -e "${Yellow}There were no changes -> nothing to push${Color_Off}"
 else
     echo -e "${Yellow}Merging done, here are the commits with the changes:${Color_Off}"
-    git log --oneline master..origin/master
+    git log --oneline master..origin/master # echo -e "$changes" caused colors to disappear - any hints? :-)
 
     echo -e "\n${Yellow}Do you want to push the changes? Type ${Green}y${Yellow}/${Green}n${Yellow}:${Color_Off}"
     confirm
