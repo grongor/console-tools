@@ -31,7 +31,7 @@ done
 branch=$(git rev-parse --abbrev-ref HEAD)
 #branch=source_test # test source branch
 if [[ $branch == 'master' ]]; then
-    echo -e "\nYou are on the master branch - please checkout to branch you want to push"
+    echo -e "\n${White}${On_Red}You are on the master branch - please checkout to branch you want to push${Color_Off}"
     exit 1
 fi
 
@@ -42,6 +42,7 @@ if [[ -n $onto ]]; then
     [[ $? -eq 0 ]] && exit
 fi
 
+echo -e "${Yellow}Going to pull the ${Green}master${Yellow}, fast-forward only${Color_Off}"
 git checkout master
 git pull --ff-only
 
@@ -52,6 +53,8 @@ if [[ $? -ne 0 ]]; then
     echo -e "Please fix them and then run this command again if you wish.\n"
     exit 1
 fi
+
+echo -e "${Yellow}Going to rebase branch ${Green}${branch}${Yellow} to the ${Green}master${Color_Off}"
 
 git rebase $interactive $onto ${to} ${branch}
 
@@ -64,13 +67,22 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
+echo -e "${Yellow}Going to merge rebased branch ${Green}${branch}${Yellow} with the ${Green}master${Color_Off}"
+
 git checkout master
 git merge $branch
 
-git log --oneline master..origin/master
+changes=$(git log --oneline master..origin/master)
 
-echo -e "\nMerging completed. Do you want to push the changes? Type y/n:"
-confirm
-[[ $? -eq 0 ]] && exit
+if [[ -z $changes ]]; then
+    echo -e "${Yellow}There were no changes -> nothing to push${Color_Off}"
+else
+    echo -e "${Yellow}Merging done, here are the commits with the changes:${Color_Off}"
+    git log --oneline master..origin/master
 
-git push
+    echo -e "\n${Yellow}Do you want to push the changes? Type ${Green}y${Yellow}/${Green}n${Yellow}:${Color_Off}"
+    confirm
+    [[ $? -eq 0 ]] && exit
+
+    git push
+fi
