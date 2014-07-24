@@ -41,7 +41,6 @@ if [[ $staggedChanges == 1 || $notStaggedChanges == 1 ]]; then
 fi
 
 branch=$(git rev-parse --abbrev-ref HEAD)
-#branch=source_test # test source branch
 if [[ $branch == 'master' ]]; then
     echo -e "\n${White}${On_Red}You are on the master branch - please checkout to branch you want to push${Color_Off}"
     exit 1
@@ -58,8 +57,6 @@ echo -e "${Yellow}Going to pull the ${Green}master${Yellow}, fast-forward only${
 git checkout master
 git pull --ff-only
 
-#mkdir /if/this/folder/exists/then/you/are/insane 2> /dev/null # test pull conflicts
-
 if [[ $? -ne 0 ]]; then
     echo -e "\n${White}${On_Red}Some conflicts appeared after we pulled the master branch.${Color_Off}\n\n"
     echo -e "Please fix them and then run this command again if you wish.\n"
@@ -69,8 +66,6 @@ fi
 echo -e "${Yellow}Going to rebase branch ${Green}${branch}${Yellow} to the ${Green}master${Color_Off}"
 
 git rebase $interactive $onto ${to} ${branch}
-
-#mkdir /if/this/folder/exists/then/you/are/insane 2> /dev/null # test rebase conflicts
 
 if [[ $? -ne 0 ]]; then
     echo -e "\n${White}${On_Red}Some conflicts appeared after the we did the rebase.${Color_Off}\n\n"
