@@ -28,6 +28,18 @@ while true; do
     esac
 done
 
+git update-index -q --refresh
+git diff-index --quiet --cached HEAD
+staggedChanges=$?
+git diff-files --quiet
+notStaggedChanges=$?
+
+if [[ $staggedChanges == 1 || $notStaggedChanges == 1 ]]; then
+    echo -e "\n${White}${On_Red}You have some not commited changes or unstagged changes in your repository.${Color_Off}\n"
+    echo -e "Please commit or stash them and then run this command again if you wish."
+    exit 1
+fi
+
 branch=$(git rev-parse --abbrev-ref HEAD)
 #branch=source_test # test source branch
 if [[ $branch == 'master' ]]; then
@@ -72,17 +84,22 @@ echo -e "${Yellow}Going to merge rebased branch ${Green}${branch}${Yellow} with 
 git checkout master
 git merge $branch
 
-changes=$(git log --oneline master..origin/master)
+changes=$(git log --oneline --color origin/master..master)
 
 if [[ -z $changes ]]; then
     echo -e "${Yellow}There were no changes -> nothing to push${Color_Off}"
 else
-    echo -e "${Yellow}Merging done, here are the commits with the changes:${Color_Off}"
-    git log --oneline master..origin/master # echo -e "$changes" caused colors to disappear - any hints? :-)
+    echo -e "${Yellow}Merging done, here are the commits with the changes:${Color_Off}\n"
+    echo -e "${changes}"
 
     echo -e "\n${Yellow}Do you want to push the changes? Type ${Green}y${Yellow}/${Green}n${Yellow}:${Color_Off}"
     confirm
     [[ $? -eq 0 ]] && exit
 
     git push
+
+    if [[ $? == 1 ]]; then
+        echo -e "\n${White}${On_Red}Failed to push your changes.${Color_Off}\n"
+        echo -e "There are probably new commits on the origin - please pull them and then push the changes manualy."
+    fi
 fi
