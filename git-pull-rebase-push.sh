@@ -68,7 +68,7 @@ echo -e "${Yellow}Going to rebase branch ${Green}${branch}${Yellow} to the ${Gre
 git rebase $interactive $onto ${to} ${branch}
 
 if [[ $? -ne 0 ]]; then
-    echo -e "\n${White}${On_Red}Some conflicts appeared after the we did the rebase.${Color_Off}\n\n"
+    echo -e "\n${White}${On_Red}Some conflicts appeared after we did the rebase.${Color_Off}\n\n"
     echo -e "Please fix them and then run this command again if you wish."
     echo -e "To do so, please ${Green}follow the git instructions above the error message.${Color_Off}\n"
     exit 1
