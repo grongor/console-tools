@@ -9,4 +9,4 @@ pull-rebase-push - prp
 **Recommended alias:** git config --global git.prp "!/path/to/git-pull-rebase-push.sh "  
 For usage information use **git prp -h**
 
-This script will basically perform a pull on master branch (only fast-forward, no merge commits will be created), rebases the current branch with the master, performs a merge with the rebased branch and finally pushes the changes.
+This script will basically perform a **pull** on the master branch (only fast-forward, no merge commits will be created), **rebases** the current branch with the master branch, performs a **merge** of the master branch with the rebased branch and finally (optionally) **pushes** the changes.
