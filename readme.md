@@ -1,5 +1,5 @@
-git-tools
-=========
+grongor/console-tools
+=====================
 
 This package contains some usefull scripts which I use to simplify my daily tasks. If you like them then feel free to use them. Any suggestions for improvements and new scripts are welcome - please send a pull request :-)
 
