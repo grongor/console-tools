@@ -23,3 +23,13 @@ Use as you would use the **git checkout** command
 This script is simple wrapper for **git checkout**. It allows you to pass a number of Jira task instead of the full
 branch name. If the task isn't found in your local branches or if you pass regular branch name (or whatever else)
 then you get the default git error message.
+
+branch-remove - brm
+----------------------
+
+**Recommended alias:** git config --global git.brm "!/path/to/git-branch-remove.sh "  
+To clean all the merged branches use **git brm**
+
+If you are tired of manually removing all the old branches then this script is for you. Just run **git brm**
+and all your local branches that are already merged into master (therefore they are useless to keep)
+will be removed. Simple as that.
