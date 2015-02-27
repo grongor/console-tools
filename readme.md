@@ -8,6 +8,7 @@ pull-rebase-push - prp
 ----------------------
 
 **Recommended alias:** git config --global alias.prp '!"/path/to/git-pull-rebase-push.sh" '
+
 For usage information use **git prp -h**
 
 This script will basically perform a **pull** on the master branch (only fast-forward, no merge commits will be
@@ -18,6 +19,7 @@ checkout - c
 ----------------------
 
 **Recommended alias:** git config --global alias.c "!"/path/to/git-checkout.sh" "
+
 Use as you would use the **git checkout** command
 
 This script is simple wrapper for **git checkout**. It allows you to pass a number of Jira task instead of the full
@@ -28,6 +30,7 @@ branch-remove - brm
 ----------------------
 
 **Recommended alias:** git config --global alias.brm "!"/path/to/git-branch-remove.sh" "
+
 To clean all the merged branches use **git brm**
 
 If you are tired of manually removing all the old branches then this script is for you. Just run **git brm**
