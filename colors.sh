@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Reset
-Color_Off='\e[0m'       # Text Reset
+ColorOff='\e[0m'       # Text Reset
 
 # Regular Colors
 Black='\e[0;30m'        # Black
@@ -34,14 +34,14 @@ UCyan='\e[4;36m'        # Cyan
 UWhite='\e[4;37m'       # White
 
 # Background
-On_Black='\e[40m'       # Black
-On_Red='\e[41m'         # Red
-On_Green='\e[42m'       # Green
-On_Yellow='\e[43m'      # Yellow
-On_Blue='\e[44m'        # Blue
-On_Purple='\e[45m'      # Purple
-On_Cyan='\e[46m'        # Cyan
-On_White='\e[47m'       # White
+OnBlack='\e[40m'       # Black
+OnRed='\e[41m'         # Red
+OnGreen='\e[42m'       # Green
+OnYellow='\e[43m'      # Yellow
+OnBlue='\e[44m'        # Blue
+OnPurple='\e[45m'      # Purple
+OnCyan='\e[46m'        # Cyan
+OnWhite='\e[47m'       # White
 
 # High Intensity
 IBlack='\e[0;90m'       # Black
@@ -64,11 +64,11 @@ BICyan='\e[1;96m'       # Cyan
 BIWhite='\e[1;97m'      # White
 
 # High Intensity backgrounds
-On_IBlack='\e[0;100m'   # Black
-On_IRed='\e[0;101m'     # Red
-On_IGreen='\e[0;102m'   # Green
-On_IYellow='\e[0;103m'  # Yellow
-On_IBlue='\e[0;104m'    # Blue
-On_IPurple='\e[0;105m'  # Purple
-On_ICyan='\e[0;106m'    # Cyan
-On_IWhite='\e[0;107m'   # White
+OnIBlack='\e[0;100m'   # Black
+OnIRed='\e[0;101m'     # Red
+OnIGreen='\e[0;102m'   # Green
+OnIYellow='\e[0;103m'  # Yellow
+OnIBlue='\e[0;104m'    # Blue
+OnIPurple='\e[0;105m'  # Purple
+OnICyan='\e[0;106m'    # Cyan
+OnIWhite='\e[0;107m'   # White

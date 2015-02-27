@@ -15,7 +15,7 @@ function confirm() {
     [[ -n $question ]] && echo -e $question > /dev/tty
     while read answer
     do
-        case $(echo $answer | tr '[:upper:]' '[:lower:]') in
+        case $(echo "$answer" | tr '[:upper:]' '[:lower:]') in
             y) return 1 ;;
             n) return 0 ;;
             *) [[ -n $whenInvalid ]] && echo -e $whenInvalid > /dev/tty ;;
