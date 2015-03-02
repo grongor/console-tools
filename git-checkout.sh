@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$#" -ne 1 ]; then
+    git checkout $@
+    exit $?
+fi
+
 branch=$1;
 
 # if you pass only the number as branch name then we

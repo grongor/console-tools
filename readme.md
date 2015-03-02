@@ -7,7 +7,7 @@ use them. Any suggestions for improvements and new scripts are welcome - please 
 pull-rebase-push - prp
 ----------------------
 
-**Recommended alias:** git config --global alias.prp '!"/path/to/git-pull-rebase-push.sh" '
+**Recommended alias:** git config --global alias.prp "! '/path/to/git-pull-rebase-push.sh' "
 
 For usage information use **git prp -h**
 
@@ -18,7 +18,7 @@ the rebased branch and finally (optionally) **pushes** the changes.
 checkout - c
 ----------------------
 
-**Recommended alias:** git config --global alias.c "!"/path/to/git-checkout.sh" "
+**Recommended alias:** git config --global alias.c "! : git checkout ; '/path/to/git-checkout.sh' "
 
 Use as you would use the **git checkout** command
 
@@ -29,7 +29,7 @@ then you get the default git error message.
 branch-remove - brm
 ----------------------
 
-**Recommended alias:** git config --global alias.brm "!"/path/to/git-branch-remove.sh" "
+**Recommended alias:** git config --global alias.brm "! '/path/to/git-branch-remove.sh' "
 
 To clean all the merged branches use **git brm**
 
